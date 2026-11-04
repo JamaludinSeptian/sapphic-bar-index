@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<link rel="icon" href="data:," />
+<title>The Sapphic Bar Index — Barcelona Field Guide (Study Rebuild)</title>
+<meta name="description" content="An ongoing investigation to find sapphic bars, spaces, and nights out in Barcelona. A study rebuild of sapphicindex.com." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700;800&family=Caveat:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#fff6e3;
+    --paper-2:#ffedcb;
+    --ink:#1c1410;
+    --pink:#ff5a8a;
+    --pink-soft:#ffd3e0;
+    --red:#e23a2e;
+    --yellow:#ffc93c;
+    --lav:#c9b8ff;
+    --teal:#2a9d8f;
+    --cream-card:#fffdf6;
+    --line:2px solid var(--ink);
+    --shadow:6px 6px 0 var(--ink);
+    --shadow-sm:4px 4px 0 var(--ink);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;font-size:16px;line-height:1.55;
+    background-image:radial-gradient(rgba(28,20,16,.09) 1px, transparent 1.1px);
+    background-size:22px 22px;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--pink);color:#fff}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  :focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+  /* ---------- ticker ---------- */
+  .ticker{background:var(--ink);color:var(--paper);overflow:hidden;padding:.45rem 0;border-bottom:var(--line)}
+  .ticker-track{display:flex;gap:0;width:max-content;animation:tick 30s linear infinite}
+  .ticker span{font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;padding:0 1.1rem;white-space:nowrap}
+  .ticker b{color:var(--yellow);font-weight:700}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none}
+    html{scroll-behavior:auto}
+    .spin-slow{animation:none !important}
+    .wiggle:hover{transform:none !important}
+  }
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+  /* ---------- masthead meta ---------- */
+  .meta-bar{
+    display:flex;flex-wrap:wrap;gap:0;border:var(--line);background:var(--cream-card);
+    margin-top:1.4rem;box-shadow:var(--shadow-sm);
+  }
+  .meta-bar div{flex:1 1 150px;padding:.65rem 1rem;border-right:var(--line);font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+  .meta-bar div:last-child{border-right:none}
+  .meta-bar strong{display:block;font-size:1rem;letter-spacing:0}
+  .meta-bar .hot{background:var(--yellow)}
+  @media(max-width:640px){.meta-bar div{flex:1 1 44%;border-bottom:var(--line)}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:clamp(2rem,6vw,4.5rem) 0 2.5rem;text-align:left}
+  .hero .the{font-family:"Caveat",cursive;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--red);transform:rotate(-3deg);display:inline-block;margin-left:.4rem}
+  h1{
+    font-family:"Anton","Archivo",sans-serif;font-weight:400;line-height:.92;margin:.1em 0 .35em;
+    font-size:clamp(3.2rem,11.5vw,8.2rem);letter-spacing:-.01em;text-transform:uppercase;
+  }
+  h1 .row{display:block}
+  h1 em{font-style:italic;font-weight:900;color:var(--pink);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+  h1 .bar-word{position:relative;display:inline-block}
+  h1 .bar-word::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.18em;background:var(--yellow);z-index:-1;transform:rotate(-1deg)}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:2.2rem;align-items:start}
+  @media(max-width:820px){.hero-grid{grid-template-columns:1fr}}
+  .lede{font-size:clamp(1.05rem,2.2vw,1.35rem);max-width:34em;font-weight:500}
+  .lede b{background:var(--pink-soft);padding:0 .25em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .ranked{font-family:"Caveat",cursive;font-size:1.45rem;color:var(--red);transform:rotate(-1.5deg);display:inline-block;margin-top:.6rem}
+  .ranked a{text-decoration-style:wavy;text-decoration-color:var(--pink);text-underline-offset:4px}
+
+  /* collage card */
+  .collage{
+    position:relative;border:var(--line);background:var(--lav);box-shadow:var(--shadow);
+    padding:1.2rem;transform:rotate(1.6deg);
+  }
+  .collage::before{content:"FIELD EVIDENCE — BCN";position:absolute;top:-14px;left:18px;background:var(--ink);color:var(--paper);font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.12em;padding:.3rem .6rem;transform:rotate(-2deg)}
+  .collage svg{width:100%;height:auto;display:block}
+  .tape{position:absolute;width:92px;height:26px;background:rgba(255,201,60,.85);border-left:2px dashed rgba(28,20,16,.35);border-right:2px dashed rgba(28,20,16,.35);top:-12px;right:26px;transform:rotate(6deg)}
+  .collage figcaption{font-family:"Caveat",cursive;font-size:1.3rem;margin-top:.5rem;transform:rotate(-1deg)}
+  .stamp{
+    display:inline-block;border:3px solid var(--red);color:var(--red);border-radius:6px;
+    font-family:"Space Mono",monospace;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:.35rem .7rem;transform:rotate(-6deg);font-size:.85rem;background:rgba(255,246,227,.7);
+  }
+
+  /* ---------- field guide key ---------- */
+  .key{border:var(--line);background:var(--ink);color:var(--paper);box-shadow:var(--shadow);margin:1rem 0 0}
+  .key-head{display:flex;align-items:center;gap:.7rem;padding:.8rem 1.2rem;border-bottom:2px solid var(--paper);font-family:"Space Mono",monospace;letter-spacing:.14em;font-size:.85rem;text-transform:uppercase}
+  .key-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+  .key-grid div{padding:1rem 1.2rem;border-right:1px dashed rgba(255,246,227,.4)}
+  .key-grid div:last-child{border-right:none}
+  .key-grid h3{margin:0 0 .35rem;font-family:"Anton","Archivo",sans-serif;font-size:1.05rem;color:var(--yellow)}
+  .key-grid p{margin:0;font-size:.88rem;color:#f3e9d2}
+  @media(max-width:820px){.key-grid{grid-template-columns:1fr 1fr}.key-grid div{border-bottom:1px dashed rgba(255,246,227,.4)}}
+  @media(max-width:480px){.key-grid{grid-template-columns:1fr}}
+
+  /* ---------- controls ---------- */
+  .controls{
+    position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:var(--line);
+    padding:.9rem 0;margin-top:2.6rem;
+  }
+  .controls .wrap{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+  .search{flex:1 1 220px;display:flex;align-items:center;gap:.5rem;border:var(--line);background:var(--cream-card);padding:.55rem .8rem;box-shadow:var(--shadow-sm)}
+  .search svg{flex:none}
+  .search input{border:none;background:none;font:inherit;width:100%;font-size:16px;color:var(--ink)}
+  .search input:focus{outline:none}
+  .search:focus-within{outline:3px solid var(--pink);outline-offset:1px}
+  select{border:var(--line);background:var(--cream-card);padding:.6rem .7rem;font:inherit;font-weight:700;box-shadow:var(--shadow-sm);font-size:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;width:100%}
+  .chip{border:var(--line);background:var(--cream-card);padding:.35rem .85rem;font-weight:700;font-size:.88rem;box-shadow:3px 3px 0 var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--pink);color:#fff}
+  .chip:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .count-line{font-family:"Space Mono",monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+  .count-line b{background:var(--yellow);padding:0 .3em}
+
+  /* ---------- index entries ---------- */
+  .index-head{display:flex;align-items:baseline;gap:1rem;margin:2.4rem 0 .4rem;flex-wrap:wrap}
+  .index-head h2{font-family:"Anton","Archivo",sans-serif;font-weight:400;font-size:clamp(2.2rem,6vw,3.6rem);margin:0;text-transform:uppercase}
+  .index-head .hand{font-family:"Caveat",cursive;font-size:1.5rem;color:var(--red);transform:rotate(-2deg)}
+  .entries{display:flex;flex-direction:column;gap:2.2rem;padding-bottom:1rem}
+  .entry{
+    border:var(--line);background:var(--cream-card);box-shadow:var(--shadow);
+    display:grid;grid-template-columns:120px 1fr 210px;overflow:hidden;
+  }
+  .entry:nth-child(odd){transform:rotate(-.35deg)}
+  .entry:nth-child(even){transform:rotate(.3deg)}
+  .entry .num{
+    font-family:"Anton","Archivo",sans-serif;font-weight:400;font-size:3rem;line-height:1;
+    display:flex;align-items:flex-start;justify-content:center;padding:1.4rem .5rem;
+    border-right:var(--line);
+  }
+  .entry.c-pink .num{background:var(--pink-soft)} .entry.c-yellow .num{background:var(--yellow)}
+  .entry.c-lav .num{background:var(--lav)} .entry.c-red .num{background:#ffb3ab}
+  .entry.c-teal .num{background:#bfe8e2}
+  .entry-main{padding:1.3rem 1.5rem 1.5rem}
+  .entry-main h3{font-family:"Anton","Archivo",sans-serif;font-weight:400;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.02;margin:0 0 .2rem;text-transform:uppercase}
+  .entry-main .kicker{font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#6b5844}
+  .entry-main .desc{margin:.7rem 0 0;max-width:36em}
+  .entry-main .extra{font-weight:700;margin-top:.45rem}
+  .tbd{display:inline-block;background:var(--ink);color:var(--yellow);font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.12em;padding:.2rem .55rem;transform:rotate(-2deg);margin-left:.5rem;vertical-align:middle}
+  .notes{margin-top:1.1rem;border-top:2px dashed rgba(28,20,16,.35);padding-top:.9rem}
+  .notes h4{margin:0 0 .5rem;font-family:"Caveat",cursive;font-size:1.35rem;color:var(--red)}
+  .notes ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.35rem 1.4rem}
+  .notes li{padding-left:1.15rem;position:relative;font-size:.95rem}
+  .notes li::before{content:"";position:absolute;left:0;top:.52em;width:.5rem;height:.5rem;background:var(--pink);border:1.5px solid var(--ink);border-radius:50%}
+  @media(max-width:640px){.notes ul{grid-template-columns:1fr}}
+  .tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1rem}
+  .tag{font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid var(--ink);padding:.22rem .55rem;background:var(--paper-2)}
+  .entry-side{border-left:var(--line);padding:1.3rem 1.1rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center;background:var(--paper)}
+  .entry-side .label{font-family:"Space Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+  .score{font-family:"Anton","Archivo",sans-serif;font-weight:400;font-size:4.2rem;line-height:.95}
+  .meter{width:100%;height:16px;border:var(--line);background:#fff;overflow:hidden}
+  .meter i{display:block;height:100%;background:repeating-linear-gradient(-45deg,var(--pink) 0 10px,#ff7ba3 10px 20px);width:0;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+  .verdict{font-family:"Caveat",cursive;font-size:1.25rem;line-height:1.15}
+  .shortlist-btn{margin-top:auto;border:var(--line);background:var(--cream-card);padding:.5rem .9rem;font-weight:800;box-shadow:var(--shadow-sm);display:inline-flex;gap:.45rem;align-items:center}
+  .shortlist-btn[aria-pressed="true"]{background:var(--red);color:#fff}
+  .shortlist-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  @media(max-width:900px){
+    .entry{grid-template-columns:74px 1fr}
+    .entry .num{font-size:2rem}
+    .entry-side{grid-column:1/-1;border-left:none;border-top:var(--line);flex-direction:row;flex-wrap:wrap;justify-content:center}
+    .score{font-size:2.6rem}
+    .meter{flex:1 1 140px}
+    .shortlist-btn{margin-top:0}
+  }
+  .empty{border:var(--line);background:var(--cream-card);box-shadow:var(--shadow-sm);padding:2rem;text-align:center}
+  .empty p{font-family:"Caveat",cursive;font-size:1.6rem;margin:0 0 .8rem}
+
+  /* ---------- end of report / submit / about ---------- */
+  .end-report{text-align:center;padding:3.5rem 0 1rem}
+  .end-report .big{font-family:"Anton","Archivo",sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(2.4rem,7vw,4.5rem);line-height:1;margin:0}
+  .end-report .fornow{font-family:"Caveat",cursive;font-size:2rem;color:var(--red);transform:rotate(-2deg);display:inline-block;margin-top:.4rem}
+  .end-report p{max-width:34em;margin:1.2rem auto 0}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2.5rem 0 3.5rem}
+  @media(max-width:820px){.duo{grid-template-columns:1fr}}
+  .panel{border:var(--line);box-shadow:var(--shadow);padding:1.8rem;position:relative}
+  .panel.submit{background:var(--yellow);transform:rotate(-.6deg)}
+  .panel.follow{background:var(--pink-soft);transform:rotate(.6deg)}
+  .panel h2{font-family:"Anton","Archivo",sans-serif;font-weight:400;text-transform:uppercase;line-height:1.02;font-size:clamp(1.5rem,3.4vw,2.1rem);margin:0 0 .7rem}
+  .panel p{margin:0 0 1.2rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;border:var(--line);background:var(--ink);color:var(--paper);font-weight:800;padding:.75rem 1.3rem;text-decoration:none;box-shadow:var(--shadow-sm)}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .btn.light{background:var(--cream-card);color:var(--ink)}
+  .about{border:var(--line);background:var(--cream-card);box-shadow:var(--shadow);padding:clamp(1.6rem,4vw,2.6rem);display:grid;grid-template-columns:200px 1fr;gap:2rem;margin-bottom:3rem}
+  @media(max-width:700px){.about{grid-template-columns:1fr}}
+  .about .avatar{border:var(--line);background:var(--lav);aspect-ratio:1;display:flex;align-items:center;justify-content:center;transform:rotate(-2deg)}
+  .about h2{font-family:"Caveat",cursive;font-size:2rem;color:var(--red);margin:0 0 .6rem}
+  .about p{margin:0 0 .8rem;max-width:38em}
+  footer{border-top:var(--line);background:var(--ink);color:var(--paper);padding:1.6rem 0 2.2rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+  footer .mono{font-family:"Space Mono",monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#e8dcc0}
+  footer a{color:var(--yellow)}
+  .spin-slow{animation:spin 14s linear infinite;transform-origin:center}
+  @keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+
+<div class="wrap">
+
+  <!-- Masthead -->
+  <div class="meta-bar" role="group" aria-label="Issue information">
+    <div class="hot">TSBI ™<strong>The Sapphic Bar Index</strong></div>
+    <div>Issue<strong>001</strong></div>
+    <div>Season<strong>Summer 2026</strong></div>
+    <div>Sapphic spots reviewed<strong>7 — Barcelona</strong></div>
+    <div>Last updated<strong>July 2026</strong></div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <span class="the">The</span>
+    <h1>
+      <span class="row"><em>Sapphic</em></span>
+      <span class="row"><span class="bar-word">Bar</span> Index<sup style="font-size:.25em;vertical-align:super">™</sup></span>
+    </h1>
+    <div class="hero-grid">
+      <div>
+        <p class="lede">An ongoing investigation to find <b>sapphic bars, spaces, and nights out in Barcelona</b> — compiled using field research, community intel, and an irresponsible amount of vermouth.</p>
+        <span class="ranked">*Ranked by our highly qualified team of sapphics (<a href="https://www.instagram.com/nelkcr/" target="_blank" rel="noopener">me</a>)</span>
+        <div style="margin-top:1.4rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+          <a class="btn" href="#index">Read the index
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 4v16m0 0l-6-6m6 6l6-6"/></svg>
+          </a>
+          <span class="stamp">Field-tested</span>
+        </div>
+      </div>
+      <figure class="collage" style="margin:0">
+        <span class="tape" aria-hidden="true"></span>
+        <!-- Hand-drawn substitute artwork: vermouth, disco ball, photobooth, ping pong -->
+        <svg viewBox="0 0 420 300" role="img" aria-label="Collage illustration of a vermouth glass, disco ball, photobooth strip and ping pong paddles">
+          <circle cx="330" cy="62" r="40" fill="#fff6e3" stroke="#1c1410" stroke-width="3"/>
+          <g stroke="#1c1410" stroke-width="2"><path d="M292 50h76M294 74h72M330 22v80M306 30c10 20 10 44 0 64M354 30c-10 20-10 44 0 64"/></g>
+          <path d="M330 22v-14" stroke="#1c1410" stroke-width="3"/>
+          <g class="spin-slow"><path d="M70 30l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#ffc93c" stroke="#1c1410" stroke-width="2"/></g>
+          <path d="M368 128l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#ff5a8a" stroke="#1c1410" stroke-width="2"/>
+          <path d="M120 250 L170 120 L220 250 Z" fill="#fffdf6" stroke="#1c1410" stroke-width="3"/>
+          <path d="M138 205h64" stroke="#e23a2e" stroke-width="10"/>
+          <path d="M170 250v28M140 282h60" stroke="#1c1410" stroke-width="4"/>
+          <circle cx="170" cy="112" r="10" fill="#2a9d8f" stroke="#1c1410" stroke-width="3"/>
+          <rect x="36" y="120" width="52" height="150" rx="4" fill="#fffdf6" stroke="#1c1410" stroke-width="3" transform="rotate(-5 62 195)"/>
+          <rect x="44" y="130" width="36" height="36" fill="#ffd3e0" stroke="#1c1410" stroke-width="2" transform="rotate(-5 62 195)"/>
+          <rect x="44" y="172" width="36" height="36" fill="#c9b8ff" stroke="#1c1410" stroke-width="2" transform="rotate(-5 62 195)"/>
+          <rect x="44" y="214" width="36" height="36" fill="#ffc93c" stroke="#1c1410" stroke-width="2" transform="rotate(-5 62 195)"/>
+          <ellipse cx="300" cy="215" rx="42" ry="34" fill="#e23a2e" stroke="#1c1410" stroke-width="3" transform="rotate(18 300 215)"/>
+          <path d="M332 240l26 30" stroke="#1c1410" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="262" cy="168" r="13" fill="#fffdf6" stroke="#1c1410" stroke-width="3"/>
+          <path d="M96 84c6-14 30-14 34 2 2 10-8 18-17 24-9-6-19-14-17-26z" fill="#ff5a8a" stroke="#1c1410" stroke-width="3"/>
+        </svg>
+        <figcaption>Exhibit A: everything a good night needs.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <!-- Field guide key -->
+  <section class="key" aria-labelledby="keyTitle">
+    <div class="key-head">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffc93c" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <span id="keyTitle">Field Guide Key</span>
+    </div>
+    <div class="key-grid">
+      <div><h3>Sapphic Index</h3><p>The big number. Scored out of 100 by the research team — vibe, crowd, and how likely you are to leave with a story.</p></div>
+      <div><h3>Field Notes</h3><p>Unfiltered observations from the floor: the photobooth, the dance room, the crush probability. No PR speak.</p></div>
+      <div><h3>TBD stamp</h3><p>Still under investigation. The spot is real, the verdict is in — the final details are being confirmed in the field.</p></div>
+      <div><h3>Shortlist</h3><p>Tap the heart on any entry to build your night-out shortlist for this visit. It lives on this page only.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- Controls -->
+<div class="controls" id="index">
+  <div class="wrap">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="searchInput" type="search" placeholder="Search bars, notes, vibes…" aria-label="Search the index" />
+    </label>
+    <label class="count-line" for="sortSelect">Sort
+      <select id="sortSelect">
+        <option value="index">Index order</option>
+        <option value="score">Highest score</option>
+        <option value="az">Name A–Z</option>
+      </select>
+    </label>
+    <span class="count-line" id="shortlistCount" aria-live="polite">Shortlist: <b>0</b></span>
+    <div class="chips" id="chips" role="group" aria-label="Filter by vibe"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="index-head">
+    <h2>The Index</h2>
+    <span class="hand">seven spots, zero sausage fests*</span>
+  </div>
+  <p class="count-line" id="resultCount" aria-live="polite"></p>
+  <main class="entries" id="entries" style="margin-top:1rem"></main>
+  <div class="empty" id="emptyState" hidden>
+    <p>No spots match that search — the field team is devastated.</p>
+    <button class="btn light" id="resetBtn" type="button">Clear search &amp; filters</button>
+  </div>
+
+  <!-- End of report -->
+  <section class="end-report">
+    <p class="big">End of report.</p>
+    <span class="fornow">For now.</span>
+    <p>New submissions, field notes, and community recommendations are continuously being reviewed.</p>
+  </section>
+
+  <div class="duo">
+    <section class="panel submit">
+      <h2>Know a sapphic bar/event we should know about?</h2>
+      <p>Submit your field research — a hidden gem, a weird event, a bar full of lesbians — and we'll add it in. For research purposes, obviously.</p>
+      <a class="btn" href="https://sapphicindex.com/?ref=onepagelove" target="_blank" rel="noopener">Submit via the original index
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+      </a>
+    </section>
+    <section class="panel follow">
+      <h2>Follow the investigation</h2>
+      <p>Join us for community spotlights, Bar School, memes, and queer Barcelona updates.</p>
+      <a class="btn light" href="https://www.instagram.com/nelkcr/" target="_blank" rel="noopener">Follow us on Instagram
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </section>
+  </div>
+
+  <!-- About -->
+  <section class="about" aria-labelledby="aboutTitle">
+    <div class="avatar" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="46" r="24" fill="#fff6e3" stroke="#1c1410" stroke-width="3"/><path d="M36 44c2-20 46-20 48 0-8-8-16-10-24-10s-16 2-24 10z" fill="#e23a2e" stroke="#1c1410" stroke-width="3"/><path d="M28 108c4-22 18-30 32-30s28 8 32 30" fill="#ff5a8a" stroke="#1c1410" stroke-width="3"/><circle cx="52" cy="46" r="3" fill="#1c1410"/><circle cx="68" cy="46" r="3" fill="#1c1410"/><path d="M53 56c4 3 10 3 14 0" stroke="#1c1410" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div>
+      <h2 id="aboutTitle">About the project</h2>
+      <p>The Sapphic Bar Index is an independent field guide to sapphic bars, spaces, and nights out in Barcelona. It ranks venues with a 0–100 score and short field notes, aiming to help women-loving women find places where they can feel at home, meet people, and have a good time — rather than walking into yet another bar aimed squarely at men.</p>
+      <p>This page is a study reconstruction of that guide, rebuilt from scratch for learning purposes. The listings and scores above are reproduced from the original; the design, code, fonts, and artwork here are substitutes made for this exercise.</p>
+      <p>For the real, living index — and to submit a spot of your own — visit <a href="https://sapphicindex.com/?ref=onepagelove" target="_blank" rel="noopener">sapphicindex.com</a>.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">TSBI ™ — Issue 001 · Barcelona · Summer 2026</span>
+    <span class="mono">Study rebuild: all code written from scratch; fonts &amp; artwork are substitutes drawn for this page. The listings, scores &amp; wording are reproduced from <a href="https://sapphicindex.com/?ref=onepagelove" target="_blank" rel="noopener">sapphicindex.com</a> for study, read 5 Nov 2026.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var SPOTS = [
+    { n:"01", name:"Candy Darling", score:99, color:"c-pink", tbd:false,
+      desc:"Indie queer bar with happy hour, crowd pleasing tunes, art, and bad behavior.",
+      extra:"Monday night is sapphic night.",
+      notes:["Fire picantes","Photobooth","Mini dance room","Dangerously high chance of spotting your future crush","Fills up quickly, go early or risk waiting in line"],
+      tags:["dancing","photobooth","happy hour","monday night"], vibes:["dancing","start"] },
+    { n:"02", name:"Carita Bonita", score:98, color:"c-yellow", tbd:false,
+      desc:"A long-running lesbian bar that attracts everyone from regulars to first-timers looking for a night that feels a little less dominated by men.",
+      extra:"",
+      notes:["One of the most sapphic spaces in the city","Busy on weekends","Sapphic DJ's","Mixed ages, friendly crowd","A solid choice if you're new to the scene"],
+      tags:["lesbian bar","djs","weekends","newcomer friendly"], vibes:["dancing","chill"] },
+    { n:"03", name:"Titanic Bar", score:95, color:"c-lav", tbd:false,
+      desc:"More intimate and a little less chaotic than some of the city's bigger queer nights. Great if you're looking to actually have a conversation.",
+      extra:"",
+      notes:["Cozy, low-pressure atmosphere","Easy place to start conversations","Popular with locals and regulars","Good choice if clubs aren't your thing","Foosball table","Drag King and Drag Queen Shows"],
+      tags:["cozy","foosball","drag","locals"], vibes:["chill","drag"] },
+    { n:"04", name:"International Lesbians Barcelona", score:96, color:"c-red", tbd:true,
+      desc:"Social and cultural events for queer women and FLINTA. They do parties, picnics, trips, art & wine, comedy shows, film nights, book club, board games, and more.",
+      extra:"",
+      notes:["Trans-inclusive space","Best known for their Sapphic Soirées","Excellent for shy folks! The organisers will meet you at the door and do the social heavy lifting until you've found your people"],
+      tags:["events","flinta","soirées","book club"], vibes:["events","chill"] },
+    { n:"05", name:"Queer Pong", score:97, color:"c-teal", tbd:true,
+      desc:"For the sapphics who need an activity. Come for the ping-pong, stay because somehow you've been talking to the same person for two hours.",
+      extra:"",
+      notes:["Come solo — everyone else did too","No ping pong skills required","Great for newcomers to Barcelona","Someone will ask if you want to join them after","Also a London edition!"],
+      tags:["ping pong","solo friendly","newcomers","activity"], vibes:["events","chill"] },
+    { n:"06", name:"Pink Corner", score:82, color:"c-pink", tbd:false,
+      desc:"A colorful little queer bar that's great for starting the night or settling in for a few drinks with friends. Cozy, friendly, and easy to linger in.",
+      extra:"",
+      notes:["Smaller than you'd expect","Good terrace for people-watching and a drunk cig","More drinks than dancing","Easy place to start the night","Mixed queer crowd"],
+      tags:["terrace","drinks","cozy","mixed crowd"], vibes:["start","chill"] },
+    { n:"07", name:"La Federica", score:80, color:"c-yellow", tbd:false,
+      desc:"A long-running queer bar known for drag shows, cabaret nights, and community events. More mixed than sapphic, but still a solid stop if you're looking for a relaxed queer night out.",
+      extra:"",
+      notes:["Sapphics present, but you'll have to do some spotting","Strong drag show energy","Expect a mixed LGBTQ+ crowd","Come for the performances, stay for the people-watching"],
+      tags:["drag","cabaret","performances","mixed crowd"], vibes:["drag","start"] }
+  ];
+  var VIBES = [
+    {id:"all", label:"All spots"},
+    {id:"dancing", label:"Dancing"},
+    {id:"chill", label:"Chill & chat"},
+    {id:"drag", label:"Drag shows"},
+    {id:"events", label:"Events & activities"},
+    {id:"start", label:"Start the night"}
+  ];
+  function verdict(s){
+    if(s>=97) return "Practically a sure thing.";
+    if(s>=95) return "Field-team favourite.";
+    if(s>=90) return "Strong sapphic signal.";
+    if(s>=82) return "Worth the detour.";
+    return "Go for the show.";
+  }
+  var state = { q:"", vibe:"all", sort:"index", shortlist:{} };
+  var entriesEl = document.getElementById("entries");
+  var emptyEl = document.getElementById("emptyState");
+  var countEl = document.getElementById("resultCount");
+  var shortEl = document.getElementById("shortlistCount");
+
+  // ticker
+  var phrases = "";
+  for(var t=0;t<2;t++){
+    phrases += "<span><b>Study reconstruction</b> — not the original site</span><span>The Sapphic Bar Index <b>™</b></span><span>Barcelona</span><span><b>Issue 001</b></span><span>Field research</span><span><b>7 spots reviewed</b></span><span>Est. over vermouth</span>";
+  }
+  document.getElementById("tickerTrack").innerHTML = phrases;
+
+  // chips
+  var chipsEl = document.getElementById("chips");
+  VIBES.forEach(function(v){
+    var b=document.createElement("button");
+    b.type="button"; b.className="chip"; b.textContent=v.label;
+    b.setAttribute("aria-pressed", v.id==="all" ? "true":"false");
+    b.addEventListener("click", function(){
+      state.vibe=v.id;
+      chipsEl.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed","false")});
+      b.setAttribute("aria-pressed","true");
+      render();
+    });
+    chipsEl.appendChild(b);
+  });
+
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+  function render(){
+    var list = SPOTS.filter(function(s){
+      var hay = (s.name+" "+s.desc+" "+s.notes.join(" ")+" "+s.tags.join(" ")).toLowerCase();
+      var okQ = !state.q || hay.indexOf(state.q)>-1;
+      var okV = state.vibe==="all" || s.vibes.indexOf(state.vibe)>-1;
+      return okQ && okV;
+    });
+    if(state.sort==="score") list = list.slice().sort(function(a,b){return b.score-a.score});
+    if(state.sort==="az") list = list.slice().sort(function(a,b){return a.name.localeCompare(b.name)});
+
+    countEl.innerHTML = "Showing <b>"+list.length+"</b> of 7 spots";
+    emptyEl.hidden = list.length>0;
+    entriesEl.innerHTML = list.map(function(s){
+      var inList = !!state.shortlist[s.n];
+      var notes = s.notes.map(function(n){return "<li>"+esc(n)+"</li>"}).join("");
+      var tags = s.tags.map(function(t){return '<span class="tag">'+esc(t)+"</span>"}).join("");
+      return '<article class="entry '+s.color+'">'
+        + '<div class="num" aria-hidden="true">'+s.n+'</div>'
+        + '<div class="entry-main">'
+        +   '<span class="kicker">Sapphic Index — Entry '+s.n+'</span>'
+        +   '<h3>'+esc(s.name)+(s.tbd?'<span class="tbd">Details TBD</span>':"")+'</h3>'
+        +   '<p class="desc">'+esc(s.desc)+'</p>'
+        +   (s.extra?'<p class="extra">'+esc(s.extra)+'</p>':"")
+        +   '<div class="notes"><h4>Field Notes:</h4><ul>'+notes+'</ul></div>'
+        +   '<div class="tags">'+tags+'</div>'
+        + '</div>'
+        + '<aside class="entry-side" aria-label="Sapphic Index score for '+esc(s.name)+'">'
+        +   '<span class="label">Sapphic Index</span>'
+        +   '<span class="score">'+s.score+'</span>'
+        +   '<div class="meter" role="img" aria-label="Score '+s.score+' out of 100"><i data-w="'+s.score+'"></i></div>'
+        +   '<span class="verdict">'+verdict(s.score)+'</span>'
+        +   '<button type="button" class="shortlist-btn" data-n="'+s.n+'" aria-pressed="'+inList+'">'
+        +     '<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(inList?"currentColor":"none")+'" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 20.5C7 16.5 3 13.3 3 9.3 3 6.4 5.2 4.5 7.7 4.5c1.7 0 3.3.9 4.3 2.4 1-1.5 2.6-2.4 4.3-2.4 2.5 0 4.7 1.9 4.7 4.8 0 4-4 7.2-9 11.2z"/></svg>'
+        +     (inList?"Shortlisted":"Shortlist")
+        +   '</button>'
+        + '</aside></article>';
+    }).join("");
+
+    // animate meters
+    requestAnimationFrame(function(){
+      entriesEl.querySelectorAll(".meter i").forEach(function(i){ i.style.width = i.getAttribute("data-w")+"%"; });
+    });
+    entriesEl.querySelectorAll(".shortlist-btn").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var n = btn.getAttribute("data-n");
+        if(state.shortlist[n]) delete state.shortlist[n]; else state.shortlist[n]=true;
+        var c = Object.keys(state.shortlist).length;
+        shortEl.innerHTML = "Shortlist: <b>"+c+"</b>";
+        render();
+      });
+    });
+  }
+
+  document.getElementById("searchInput").addEventListener("input", function(e){
+    state.q = e.target.value.trim().toLowerCase(); render();
+  });
+  document.getElementById("sortSelect").addEventListener("change", function(e){
+    state.sort = e.target.value; render();
+  });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    state.q=""; state.vibe="all";
+    document.getElementById("searchInput").value="";
+    chipsEl.querySelectorAll(".chip").forEach(function(c,i){c.setAttribute("aria-pressed", i===0?"true":"false")});
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
